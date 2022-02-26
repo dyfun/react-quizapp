@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/layouts/Header";
+import Footer from "./components/layouts/Footer";
+import Main from "./components/Main";
+import { useContext } from "react";
+import { QuizContext } from "./context/Question/QuestionContext";
 
-function App() {
+const App = () => {
+  const { isLoaded, quizzes, quizID, setQuizID, totalScore, updateScore } = useContext(QuizContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {
+        isLoaded ? (<div className="container mx-auto bg-gray-400 pt-8 mt-8 rounded" >
+          <Header />
+          <Main quizzes={quizzes} quizID={quizID} setQuizID={setQuizID} totalScore={totalScore} updateScore={updateScore} />
+          <Footer />
+        </div >) : "Loading"
+      }
+    </>
+  )
 }
 
-export default App;
+export default App
